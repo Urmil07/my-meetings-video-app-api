@@ -85,16 +85,19 @@ app.post("/login", (req, res) => {
     });
   }
 
-  const token = client.createToken(user.id);
+  try {
+    const token = client.createToken(user.id);
 
-  return res.status(200).json({
-    token,
-    user: {
-      id: user.id,
-      email: user.email,
-    },
-  })
-
+    return res.status(200).json({
+      token,
+      user: {
+        id: user.id,
+        email: user.email,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({ error: error });
+  }
 });
 
 app.listen(PORT, () => {
