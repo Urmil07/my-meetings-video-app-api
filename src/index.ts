@@ -96,7 +96,8 @@ app.post("/login", (req, res) => {
       },
     });
   } catch (error) {
-    res.status(500).json({ error: error });
+
+    return res.status(500).json({ error: error });
   }
 });
 
